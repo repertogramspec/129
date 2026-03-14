@@ -7,10 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get Date
-        variable: date
-        run: echo "date=$(date +'%Y-%m-%d-%H;%M;%S')" >> $GITHUB_ENV
-
       - name: Build with Buildozer
         uses: NiklasPlessing/buildozer-action@v1.2
         with:

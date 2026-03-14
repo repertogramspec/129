@@ -1,0 +1,16 @@
+name: Build APK
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build APK with Buildozer
+        uses: ArtemSerebrenn/buildozer-action@v1
+        with:
+          buildozer_version: master
+          python_version: 3.8
+          

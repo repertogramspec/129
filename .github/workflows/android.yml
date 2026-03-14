@@ -1,15 +1,17 @@
 name: Build APK
-on: [push, workflow_dispatch]
+on: 
+  push:
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build with Buildozer
         uses: NiklasPlessing/buildozer-action@v1.2
         with:
           buildozer_version: master
-          python_version: 3.8
+          python_version: 3.11
           

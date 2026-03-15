@@ -1,36 +1,28 @@
 name: Build APK
 on: [push, workflow_dispatch]
-
 jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
-
-      - name: Install System Dependencies
+      - name: Install Deps
         run: |
           sudo apt update
           sudo apt install -y git zip unzip autoconf autogen libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev ant python3-pip
           pip install --upgrade pip
-          # Устанавливаем строго стабильные версии инструментов
-          pip install "cython<3.0.0" "setuptools<66.0.0" "buildozer==1.5.0"
-
-      - name: Build with Buildozer
+          pip install "cython<3.0.0" "setuptools<66.0.0" buildozer
+      - name: Run Build
         run: |
-          # ВАЖНО: сначала чистим всё, что могло остаться от прошлых попыток
-          buildozer android clean
-          # Запускаем сборку. 'yes |' сам нажмет на все лицензии
+          # Убрали clean, теперь он не будет жаловаться на пустые папки
           yes | buildozer android debug
-        
-      - name: Upload APK
+      - name: Upload
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: My-VPN-App
+          name: MyProxy-APK
           path: bin/*.apk
           

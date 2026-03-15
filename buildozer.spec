@@ -7,7 +7,7 @@ source.include_exts = py,png,jpg,kv,atlas
 version = 1.0
 
 # Самый стабильный набор для сетевых приложений
-requirements = python3,kivy==2.2.1,openssl,hostpython3==3.10.12
+requirements = python3,kivy==2.2.1,openssl
 
 orientation = portrait
 fullscreen = 0

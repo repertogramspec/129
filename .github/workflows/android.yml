@@ -21,11 +21,12 @@ jobs:
 
       - name: Build with Buildozer
         run: |
+          # Флаг --verbose позволит нам увидеть ошибку, если она случится
+          # А 'yes |' автоматически нажмет "принять условия лицензии"
           yes | buildozer android debug
         
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Qsl-VPN-Ready
+          name: Qsl-VPN-Package
           path: bin/*.apk
-          

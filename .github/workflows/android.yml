@@ -17,16 +17,20 @@ jobs:
           sudo apt update
           sudo apt install -y git zip unzip autoconf autogen libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev ant python3-pip
           pip install --upgrade pip
-          pip install "cython<3.0.0" buildozer
+          # Устанавливаем строго стабильные версии инструментов
+          pip install "cython<3.0.0" "setuptools<66.0.0" "buildozer==1.5.0"
 
       - name: Build with Buildozer
         run: |
+          # ВАЖНО: сначала чистим всё, что могло остаться от прошлых попыток
+          buildozer android clean
+          # Запускаем сборку. 'yes |' сам нажмет на все лицензии
           yes | buildozer android debug
         
       - name: Upload APK
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: Qsl-VPN-Ready
+          name: My-VPN-App
           path: bin/*.apk
           
